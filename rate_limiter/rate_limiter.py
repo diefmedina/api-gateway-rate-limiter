@@ -9,12 +9,10 @@ class RateLimiter:
         self.window_size = 60  # 1 minute window
 
     def is_allowed(self):
-        # Check if the user is allowed based on rate limits
         key = f"rate_limiter:{self.user_id}"
         current_counter = self.redis_manager.get_counter_value(key)
 
         if current_counter < REQUESTS_PER_MINUTE:
-            # Increment the counter and allow the request
             self.redis_manager.set_counter_value(key, current_counter + 1, self.window_size)
             return True
         else:

@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from .rate_limiter import RateLimiter
 from .jwt_handler import JWTHandler
+from .redis_manager import RedisManager
 
 app = Flask(__name__)
 redis_manager = RedisManager()
